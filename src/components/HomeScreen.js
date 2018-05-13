@@ -28,20 +28,15 @@ export default class HomeScreen extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // Trigger a re-render when receiving new props (when redux has more data).
     this.setState({
       dataSource: this.getUpdatedDataSource(nextProps),
     });
   }
 
   getUpdatedDataSource(props) {
-    // See the ListView.DataSource documentation for more information on
-    // how to properly structure your data depending on your use case.
-    let rows = props.pokemons;
+    let ids = props.pokemons.map((obj, index) => index);
 
-    let ids = rows.map((obj, index) => index);
-
-    return this.state.dataSource.cloneWithRows(rows, ids);
+    return this.state.dataSource.cloneWithRows(props.pokemons, ids);
   }
 
   /**
@@ -52,10 +47,8 @@ export default class HomeScreen extends React.Component {
    * @private
    */
   rowHasChanged(r1, r2) {
-    // You might want to use a different comparison mechanism for performance.
     return JSON.stringify(r1) !== JSON.stringify(r2);
   }
-
 
   /**
    * @private
@@ -76,8 +69,6 @@ export default class HomeScreen extends React.Component {
   }
 
   render() {
-    console.log(this.props.pokemons);
-
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Home Screen</Text>
@@ -88,6 +79,7 @@ export default class HomeScreen extends React.Component {
           onLoadMoreAsync={this.loadMore}
           dataSource={this.state.dataSource}
           renderRow={rowData => <ListItem rowData={rowData} onPress={() => this.rowPressed(rowData.id)} />}
+          enableEmptySections={true}
         />
         <Button
           title="Go to Details"

@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import {View, Text, Button, RefreshControl} from 'react-native';
 import { ListView } from 'react-native';
 import InfiniteScrollView from 'react-native-infinite-scroll-view';
+import ListItem from './ListItem';
 
 export default class HomeScreen extends React.Component {
 
@@ -10,15 +11,19 @@ export default class HomeScreen extends React.Component {
 
     this.state = {
       dataSource: new ListView.DataSource({
-        rowHasChanged: this._rowHasChanged.bind(this),
-      }),
+        rowHasChanged: this.rowHasChanged.bind(this),
+      })
     };
 
     // Update the data store with initial data.
-    this.state.dataSource = this.getUpdatedDataStore(props);
+    this.state.dataSource = this.getUpdatedDataSource(props);
   }
 
   componentDidMount() {
+    this.props.fetchPokemons(1);
+  }
+
+  loadMore() {
     this.props.fetchPokemons(1);
   }
 
@@ -39,19 +44,35 @@ export default class HomeScreen extends React.Component {
     return this.state.dataSource.cloneWithRows(rows, ids);
   }
 
-  _rowHasChanged(r1, r2) {
+  /**
+   * @private
+   * @param r1
+   * @param r2
+   * @return {boolean}
+   * @private
+   */
+  rowHasChanged(r1, r2) {
     // You might want to use a different comparison mechanism for performance.
     return JSON.stringify(r1) !== JSON.stringify(r2);
   }
 
-  _renderRefreshControl() {
+
+  /**
+   * @private
+   * @return {*}
+   */
+  renderRefreshControl() {
     // Reload all data
     return (
       <RefreshControl
-        refreshing={this.props.listData.isFetching}
+        refreshing={this.props.isFetching}
         onRefresh={() => {}}
       />
     );
+  }
+
+  rowPressed(beerId) {
+    this.props.navigation.navigate('Details', {id: beerId});
   }
 
   render() {
@@ -61,12 +82,12 @@ export default class HomeScreen extends React.Component {
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Home Screen</Text>
         <ListView
+          refreshControl={this.renderRefreshControl()}
           renderScrollComponent={props => <InfiniteScrollView {...props} />}
+          canLoadMore={this.props.canLoadMore}
+          onLoadMoreAsync={this.loadMore}
           dataSource={this.state.dataSource}
-          renderRow={...}
-          refreshControl={this._renderRefreshControl()}
-          canLoadMore={false}
-          onLoadMoreAsync={this._loadMoreContentAsync.bind(this)}
+          renderRow={rowData => <ListItem rowData={rowData} onPress={() => this.rowPressed(rowData.id)} />}
         />
         <Button
           title="Go to Details"

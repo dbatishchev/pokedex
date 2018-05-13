@@ -8,6 +8,7 @@ import RootStack from './src/components/RootStack';
 const store = createStore(rootReducer, {
   pokemons: {
     isFetching: false,
+    canLoadMore: true,
     pokemonsById: {
 
     },

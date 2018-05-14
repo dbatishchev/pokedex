@@ -21,6 +21,7 @@ export const fetchPokemonsSuccess = response => ({
 
 export const fetchPokemons = page => (dispatch) => {
   dispatch(fetchPokemonsRequest(page));
+
   return fetch(`http://pokeapi.co/api/v2/pokemon?limit=20&offset=${20 * (page - 1)}`).then(
     response => response.json(),
     error => dispatch(fetchPokemonsFailure(error)),

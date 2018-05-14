@@ -7,3 +7,7 @@ https://github.com/react-community/create-react-native-app/issues/153
 
 https://snack.expo.io/SksoGXR0l
 axios
+
+TODO:
+[] https://stackoverflow.com/questions/2677431/where-to-install-android-sdk-on-mac-os-x?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+[] axios

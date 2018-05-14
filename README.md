@@ -10,4 +10,6 @@ axios
 
 TODO:
 [] https://stackoverflow.com/questions/2677431/where-to-install-android-sdk-on-mac-os-x?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+[] https://stackoverflow.com/questions/10303639/adb-command-not-found?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 [] axios
+[] https://facebook.github.io/react-native/docs/debugging.html

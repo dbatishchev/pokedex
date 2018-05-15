@@ -20,12 +20,16 @@ export default class HomeScreen extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchPokemons(1);
+    this.props.fetchPokemons(this.props.page);
   }
 
-  loadMore() {
-    this.props.fetchPokemons(1);
-  }
+  loadMore = () => {
+    if (this.props.isFetching) {
+      return;
+    }
+
+    this.props.fetchPokemons(this.props.page);
+  };
 
   componentWillReceiveProps(nextProps) {
     this.setState({
@@ -69,10 +73,8 @@ export default class HomeScreen extends React.Component {
   }
 
   render() {
-    console.log('render!!!');
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
+      <View>
         <ListView
           refreshControl={this.renderRefreshControl()}
           renderScrollComponent={props => <InfiniteScrollView {...props} />}
@@ -81,16 +83,6 @@ export default class HomeScreen extends React.Component {
           dataSource={this.state.dataSource}
           renderRow={rowData => <ListItem rowData={rowData} onPress={() => this.rowPressed(rowData.id)} />}
           enableEmptySections={true}
-        />
-        <Button
-          title="Go to Details"
-          onPress={() => {
-            /* 1. Navigate to the Details route with params */
-            this.props.navigation.navigate('Details', {
-              itemId: 86,
-              otherParam: 'anything you want here',
-            });
-          }}
         />
       </View>
     );

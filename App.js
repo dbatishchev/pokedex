@@ -9,6 +9,7 @@ const store = createStore(rootReducer, {
   pokemons: {
     isFetching: false,
     canLoadMore: true,
+    page: 1,
     pokemonsById: {
 
     },

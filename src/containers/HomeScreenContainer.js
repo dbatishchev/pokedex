@@ -7,6 +7,7 @@ const mapStateToProps = state => ({
   pokemons: getPokemonsList(state),
   isFetching: state.pokemons.isFetching,
   canLoadMore: state.pokemons.canLoadMore,
+  page: state.pokemons.page,
 });
 
 const mapDispatchToProps = dispatch => ({

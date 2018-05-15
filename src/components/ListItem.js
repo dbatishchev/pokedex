@@ -1,5 +1,6 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
+import pokemonGif from 'pokemon-gif';
 
 const styles = StyleSheet.create({
   thumb: {
@@ -26,24 +27,22 @@ const styles = StyleSheet.create({
 
 export default class ListItem extends React.Component {
   render() {
-    console.log('??????', this.props);
+    const imgURL = pokemonGif(this.props.rowData.name);
+
     return (
       <TouchableHighlight
         onPress={() => this.props.onPress}
         underlayColor="#dddddd"
       >
         <View>
-          {/*<View style={styles.rowContainer}>*/}
-            {/*/!*<Image style={styles.thumb} resizeMode="contain" source={{uri: this.props.rowData.image_url}}/>*!/*/}
-            {/*<View style={styles.textContainer}>*/}
-              {/**/}
-            {/*</View>*/}
-          {/*</View>*/}
-          {/*<View style={styles.separator}/>*/}
-          <Text
-            style={styles.title}
-            numberOfLines={1}
-          >{this.props.rowData.name}</Text>
+          <View style={styles.rowContainer}>
+            {imgURL && <Image style={styles.thumb} resizeMode="contain" source={{uri: imgURL}}/>}
+            <Text
+              style={styles.title}
+              numberOfLines={1}
+            >{this.props.rowData.name}</Text>
+          </View>
+          <View style={styles.separator}/>
         </View>
       </TouchableHighlight>
     );

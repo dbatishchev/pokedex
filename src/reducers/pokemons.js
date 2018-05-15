@@ -19,14 +19,13 @@ const pokemons = (state = {}, action) => {
       };
     case FETCH_POKEMONS_SUCCESS:
       const col = {};
-      each(action.response.results, (r, i) => {
-        col[i] = r;
-      });
+      each(action.response.results, r => col[r.name] = r);
 
       return {
         ...state,
-        isFetching: false,
+        page: state.page + 1,
         pokemonsById: assignIn({}, state.pokemonsById, col),
+        isFetching: false,
       };
 
     default:

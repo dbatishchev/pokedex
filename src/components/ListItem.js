@@ -4,8 +4,8 @@ import pokemonGif from 'pokemon-gif';
 
 const styles = StyleSheet.create({
   thumb: {
-    width: 60,
-    height: 80,
+    width: 50,
+    height: 50,
     marginRight: 10,
   },
   textContainer: {
@@ -27,11 +27,11 @@ const styles = StyleSheet.create({
 
 export default class ListItem extends React.Component {
   render() {
-    const imgURL = pokemonGif(this.props.rowData.name);
+    const imgURL = pokemonGif(this.props.rowData.id);
 
     return (
       <TouchableHighlight
-        onPress={() => this.props.onPress}
+        onPress={this.props.onPress}
         underlayColor="#dddddd"
       >
         <View>

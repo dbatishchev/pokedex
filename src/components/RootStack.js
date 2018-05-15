@@ -1,5 +1,5 @@
 import { createStackNavigator } from 'react-navigation';
-import DetailsScreen from './DetailsScreen';
+import DetailsScreenContainer from '../containers/DetailsScreenContainer';
 import HomeScreenContainer from '../containers/HomeScreenContainer';
 
 const RootStack = createStackNavigator(
@@ -8,7 +8,7 @@ const RootStack = createStackNavigator(
       screen: HomeScreenContainer,
     },
     Details: {
-      screen: DetailsScreen,
+      screen: DetailsScreenContainer,
     },
   },
   {

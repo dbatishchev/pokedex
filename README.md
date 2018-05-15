@@ -14,3 +14,4 @@ TODO:
 [] axios
 [] https://facebook.github.io/react-native/docs/debugging.html
 [] prettier
+[] https://github.com/jhen0409/react-native-debugger

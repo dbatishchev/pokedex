@@ -1,6 +1,7 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import pokemonGif from 'pokemon-gif';
+import capitalizeFirstLetter from '../helpers/capitalizeFirstLetter';
 
 const styles = StyleSheet.create({
   thumb: {
@@ -16,11 +17,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#dddddd',
   },
   title: {
-    fontSize: 20,
+    fontSize: 28,
     color: '#656565',
+    paddingLeft: 10,
   },
   rowContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
     padding: 10,
   },
 });
@@ -40,7 +43,7 @@ export default class ListItem extends React.Component {
             <Text
               style={styles.title}
               numberOfLines={1}
-            >{this.props.rowData.name}</Text>
+            >{capitalizeFirstLetter(this.props.rowData.name)}</Text>
           </View>
           <View style={styles.separator}/>
         </View>

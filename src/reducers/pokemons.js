@@ -65,7 +65,7 @@ const pokemons = (state = {}, action) => {
     case SET_ACTIVE_POKEMON:
       return {
         ...state,
-        activePokemonId: action.activePokemonId,
+        activePokemonId: action.id,
       };
 
     default:

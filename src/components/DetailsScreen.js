@@ -1,6 +1,7 @@
 import pokemonGif from 'pokemon-gif';
 import React from 'react';
-import {View, Text, Button, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet} from 'react-native';
+import capitalizeFirstLetter from '../helpers/capitalizeFirstLetter';
 
 const styles = StyleSheet.create({
   container: {
@@ -19,8 +20,8 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 80,
     paddingRight: 10,
-    paddingBottom: 10,
-    paddingLeft: 20,
+    paddingBottom: 20,
+    paddingLeft: 10,
   },
   imageContainer: {
     position: 'absolute',
@@ -30,28 +31,48 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
+    height: 120,
   },
   thumb: {
     width: 120,
     height: 120,
     zIndex: 10,
   },
-  statContainer: {
-    paddingTop: 3,
-    paddingBottom: 3,
-    flex: 1,
-    flexDirection: 'row',
+  name: {
+    fontSize: 32,
+    textAlign: 'center',
+    color: '#656565',
+  },
+  statsList: {
+    flexDirection: 'column',
     flexWrap: 'nowrap',
   },
+  statContainer: {
+    flex: 0,
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 30,
+  },
   statName: {
+    flex: 1,
+    fontSize: 14,
     color: '#656565',
-    width: 100,
+    textAlign: 'left',
   },
   statBar: {
+    flex: 2,
     height: 10,
+    backgroundColor: '#999999',
     borderRadius: 5,
-    backgroundColor: '#000033',
   },
+  statBarValue: {
+    width: '70%',
+    height: 10,
+    backgroundColor: '#000033',
+    borderRadius: 5,
+  }
 });
 
 export default class DetailsScreen extends React.Component {
@@ -81,15 +102,16 @@ export default class DetailsScreen extends React.Component {
             <Image style={styles.thumb} resizeMode="contain" source={{uri: imgURL}}/>
           </View>
         )}
-        <View  style={styles.wrapper}>
-          <Text>Details Screen</Text>
+        <View style={styles.wrapper}>
+          {this.props.pokemon && <Text style={styles.name}>{capitalizeFirstLetter(this.props.pokemon.name)}</Text>}
           {this.props.pokemon && this.props.pokemon.stats && (
-            <View>
+            <View style={styles.statsList}>
               {this.props.pokemon.stats.map(s => (
                 <View style={styles.statContainer} key={s.stat.name}>
-                  <Text style={styles.statName}>{s.stat.name}
-                  </Text>
-                  <View style={styles.statBar}></View>
+                  <Text style={styles.statName}>{s.stat.name}</Text>
+                  <View style={styles.statBar}>
+                    <View style={styles.statBarValue}/>
+                  </View>
                 </View>
               ))}
             </View>

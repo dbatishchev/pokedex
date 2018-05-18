@@ -1,6 +1,7 @@
 import pokemonGif from 'pokemon-gif';
 import React from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import { Badge, ButtonGroup, Text } from 'react-native-elements';
+import {View, Image, StyleSheet} from 'react-native';
 import capitalizeFirstLetter from '../helpers/capitalizeFirstLetter';
 
 const styles = StyleSheet.create({
@@ -72,6 +73,23 @@ const styles = StyleSheet.create({
     height: 10,
     backgroundColor: '#000033',
     borderRadius: 5,
+  },
+  types: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  typeItem: {
+    marginLeft: 2,
+    marginRight: 2,
+  },
+  segment: {
+    backgroundColor: '#ffffff',
+    borderColor: '#000000',
+  },
+  segmentItem: {
+    borderColor: '#000000',
+    backgroundColor: '#000000',
   }
 });
 
@@ -104,6 +122,23 @@ export default class DetailsScreen extends React.Component {
         )}
         <View style={styles.wrapper}>
           {this.props.pokemon && <Text style={styles.name}>{capitalizeFirstLetter(this.props.pokemon.name)}</Text>}
+          <View style={styles.types}>
+            <Badge style={styles.typeItem}>
+              <Text>Grass</Text>
+            </Badge>
+            <Badge style={styles.typeItem}>
+              <Text>Water</Text>
+            </Badge>
+          </View>
+
+          <View>
+            <ButtonGroup
+              onPress={()=>{}}
+              selectedIndex={0}
+              buttons={['Stats', 'Evolutions', 'Moves']}
+            />
+          </View>
+
           {this.props.pokemon && this.props.pokemon.stats && (
             <View style={styles.statsList}>
               {this.props.pokemon.stats.map(s => (
